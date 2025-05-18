@@ -2189,7 +2189,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  //#define G26_MESH_VALIDATION
+  #define G26_MESH_VALIDATION
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
@@ -2829,7 +2829,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -2839,19 +2839,19 @@
 //  M300 S<frequency Hz> P<duration ms>
 //
 #define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_HZ 880
 
 //
 // Tone queue size, used to keep beeps from blocking execution.
 // Default is 4, or override here. Costs 4 bytes of SRAM per entry.
 //
-//#define TONE_QUEUE_LENGTH 4
+#define TONE_QUEUE_LENGTH 12
 
 //
 // A sequence of tones to play at startup, in pairs of tone (Hz), duration (ms).
 // Silence in-between tones.
-//
-//#define STARTUP_TUNE { 698, 300, 0, 50, 523, 50, 0, 25, 494, 50, 0, 25, 523, 100, 0, 50, 554, 300, 0, 100, 523, 300 }
+// Family Mart Jingle: G                Eb               Bb(low)          Eb               F                Bb               Bb(low)          F                G                F                Bb(low)          Eb
+#define STARTUP_TUNE { 784, 200, 0, 50, 622, 200, 0, 50, 466, 200, 0, 50, 622, 200, 0, 50, 698, 200, 0, 50, 932, 400, 0, 50, 466, 150, 0, 50, 698, 200, 0, 50, 784, 200, 0, 50, 698, 200, 0, 50, 466, 200, 0, 50, 622, 300}
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
