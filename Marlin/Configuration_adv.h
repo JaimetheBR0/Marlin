@@ -1139,7 +1139,7 @@
   #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_NONE // Default shaper mode on Y axis
   #define FTM_SHAPING_DEFAULT_FREQ_X   37.0f      // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_DEFAULT_FREQ_Y   37.0f      // (Hz) Default peak frequency used by input shapers
-  #define FTM_LINEAR_ADV_DEFAULT_ENA   false      // Default linear advance enable (true) or disable (false)
+  #define FTM_LINEAR_ADV_DEFAULT_ENA   true       // Default linear advance enable (true) or disable (false)
   #define FTM_LINEAR_ADV_DEFAULT_K      0.0f      // Default linear advance gain. (Acceleration-based scaling factor.)
   #define FTM_SHAPING_ZETA_X            0.1f      // Zeta used by input shapers for X axis
   #define FTM_SHAPING_ZETA_Y            0.1f      // Zeta used by input shapers for Y axis
@@ -2805,8 +2805,8 @@
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT           6.0 // (mm) Don't convert E moves over this length
   #endif
-  #define RETRACT_LENGTH              1.5   // (mm) Default retract length (positive value)
-  #define RETRACT_LENGTH_SWAP          25   // (mm) Default swap retract length (positive value)
+  #define RETRACT_LENGTH              1.0   // (mm) Default retract length (positive value)
+  #define RETRACT_LENGTH_SWAP          40   // (mm) Default swap retract length (positive value)
   #define RETRACT_FEEDRATE            120   // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE              0.2   // (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH        0   // (mm) Default additional recover length (added to retract length on recover)
@@ -3030,8 +3030,8 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  X_CURRENT*(2/3)  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
+    #define X_CURRENT       700        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT_HOME  X_CURRENT*(9/10)  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -3050,8 +3050,8 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       580
-    #define Y_CURRENT_HOME  Y_CURRENT*(2/3)
+    #define Y_CURRENT       800
+    #define Y_CURRENT_HOME  Y_CURRENT*(9/10)
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
     #define Y_CHAIN_POS      -1
@@ -3070,7 +3070,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       580
+    #define Z_CURRENT       900
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -3350,7 +3350,7 @@
     #define STEALTHCHOP_U
     #define STEALTHCHOP_V
     #define STEALTHCHOP_W
-    #define STEALTHCHOP_E
+    //#define STEALTHCHOP_E
   #endif
 
   /**
