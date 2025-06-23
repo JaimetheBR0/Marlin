@@ -81,7 +81,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-#define SERIAL_PORT -1
+#define SERIAL_PORT 2
 
 /**
  * Serial Port Baud Rate
@@ -103,7 +103,7 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-#define SERIAL_PORT_2 2
+#define SERIAL_PORT_2 -1
 #define BAUDRATE_2 115200   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
@@ -693,7 +693,7 @@
 //#define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
 #define MPCTEMP         // See https://marlinfw.org/docs/features/model_predictive_control.html
 
-#define PID_MAX  255      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_MAX  240      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1     0.95   // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
@@ -715,7 +715,7 @@
     #define DEFAULT_Kd  69.08
   #endif
 #else
-  #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
+  #define BANG_MAX 240    // Limit hotend current while in bang-bang mode; 255=full current
 #endif
 
 /**
@@ -734,8 +734,8 @@
   #define MPC_EDIT_MENU                             // Add MPC editing to the "Advanced Settings" menu. (~1.3K bytes of flash)
   #define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
 
-  #define MPC_MAX 255                                 // (0..255) Current to nozzle while MPC is active.
-  #define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
+  #define MPC_MAX 240                                 // (0..255) Current to nozzle while MPC is active.
+  #define MPC_HEATER_POWER { 70.0f }                  // (W) Heat cartridge powers.
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
@@ -804,9 +804,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 87.65
-  #define DEFAULT_bedKi 16.60
-  #define DEFAULT_bedKd 308.5
+  #define DEFAULT_bedKp 86.11
+  #define DEFAULT_bedKi 16.82
+  #define DEFAULT_bedKd 293.9
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
