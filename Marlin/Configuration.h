@@ -94,7 +94,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
@@ -1904,7 +1904,7 @@
 #define X_MIN_POS -10
 #define Y_MIN_POS -5
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE+8
+#define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE+30
 #define Z_MAX_POS 400
 //#define I_MIN_POS 0
