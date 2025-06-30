@@ -64,6 +64,14 @@
 #define STRING_CONFIG_H_AUTHOR "(JaimetheBR0)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
+// @section notes
+
+// Stepper motor current [mA]:
+// X 700
+// Y 800
+// Z 900
+// E 850
+
 // @section machine
 
 // Choose the name from boards.h that matches your setup
