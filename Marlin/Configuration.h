@@ -810,9 +810,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 32.23
-  #define DEFAULT_bedKi 2.714
-  #define DEFAULT_bedKd 255.3
+  #define DEFAULT_bedKp 37.06
+  #define DEFAULT_bedKi 3.968
+  #define DEFAULT_bedKd 230.7
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -2413,13 +2413,13 @@
  *    +-------------->X     +-------------->X     +-------------->Y
  *     XY_SKEW_FACTOR        XZ_SKEW_FACTOR        YZ_SKEW_FACTOR
  */
-//#define SKEW_CORRECTION
+#define SKEW_CORRECTION
 
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 282.8427124746
-  #define XY_DIAG_BD 282.8427124746
-  #define XY_SIDE_AD 200
+  #define XY_DIAG_AC 401.0
+  #define XY_DIAG_BD 399.5
+  #define XY_SIDE_AD 289.5
 
   // Or, set the XY skew factor directly:
   //#define XY_SKEW_FACTOR 0.0
