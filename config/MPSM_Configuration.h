@@ -714,13 +714,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  14.58,  14.58 }
-    #define DEFAULT_Ki_LIST {   1.14,   1.14 }
-    #define DEFAULT_Kd_LIST {  46.57,  46.57 }
+    #define DEFAULT_Kp_LIST {  22.40,  22.40 }
+    #define DEFAULT_Ki_LIST {   1.82,   1.82 }
+    #define DEFAULT_Kd_LIST {  69.08,  69.08 }
   #else
-    #define DEFAULT_Kp  14.58
-    #define DEFAULT_Ki   1.14
-    #define DEFAULT_Kd  46.57
+    #define DEFAULT_Kp  22.46
+    #define DEFAULT_Ki   1.82
+    #define DEFAULT_Kd  69.08
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -818,9 +818,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 60.18
-  #define DEFAULT_bedKi 11.22
-  #define DEFAULT_bedKd 215.24
+  #define DEFAULT_bedKp 49.41
+  #define DEFAULT_bedKi 8.824
+  #define DEFAULT_bedKd 184.5
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1320,7 +1320,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 60 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 60 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1436,7 +1436,7 @@
  *    - Normally-closed (NC) also connect to GND.
  *    - Normally-open (NO) also connect to 5V.
  */
-//#define Z_MIN_PROBE_PIN PC14
+//#define Z_MIN_PROBE_PIN -1
 
 /**
  * Probe Type
@@ -1723,7 +1723,7 @@
  */
 #define PROBE_ENABLE_DISABLE
 #if ENABLED(PROBE_ENABLE_DISABLE)
-  //#define PROBE_ENABLE_PIN PA1   // Override the default pin here
+  //#define PROBE_ENABLE_PIN -1   // Override the default pin here
 #endif
 
 /**
@@ -1912,14 +1912,14 @@
 
 // The size of the printable area
 #define X_BED_SIZE 110
-#define Y_BED_SIZE 110
+#define Y_BED_SIZE 115
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
-#define Y_MIN_POS -6
+#define Y_MIN_POS -10
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE+15
+#define Y_MAX_POS Y_BED_SIZE+10
 #define Z_MAX_POS 125
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -1997,8 +1997,8 @@
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
-  //#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
-  #define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
+  #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+  //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
 
@@ -2530,7 +2530,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 5), (Y_MIN_POS), 10 }
+  #define NOZZLE_PARK_POINT { (X_MAX_POS), (Y_MIN_POS + 2), 10 }
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   0   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 150   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -2583,18 +2583,18 @@
   //#define NOZZLE_CLEAN_PATTERN_CIRCLE   // Provide 'G12 P2' - a circular cleaning pattern
 
   // Default pattern to use when 'P' is not provided to G12. One of the enabled options above.
-  #define NOZZLE_CLEAN_DEFAULT_PATTERN 0
+  #define NOZZLE_CLEAN_DEFAULT_PATTERN 1
 
-  #define NOZZLE_CLEAN_STROKES     12   // Default number of pattern repetitions
+  #define NOZZLE_CLEAN_STROKES     6   // Default number of pattern repetitions
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_ZIGZAG)
-    #define NOZZLE_CLEAN_TRIANGLES  4   // Default number of triangles
+    #define NOZZLE_CLEAN_TRIANGLES  3   // Default number of triangles
   #endif
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { {  2, Y_MAX_POS-10, (Z_MIN_POS + 1) } }
-  #define NOZZLE_CLEAN_END_POINT   { { 22, Y_MAX_POS-6,  (Z_MIN_POS + 1) } }
+  #define NOZZLE_CLEAN_START_POINT { {  3.0, -8.0, 2.5 } }
+  #define NOZZLE_CLEAN_END_POINT   { { 26, -4.0,  2.5 } }
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_CIRCLE)
     #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5                      // (mm) Circular pattern radius
@@ -2612,8 +2612,8 @@
   //#define NOZZLE_CLEAN_NO_Y
 
   // Require a minimum hotend temperature for cleaning
-  #define NOZZLE_CLEAN_MIN_TEMP 170
-  //#define NOZZLE_CLEAN_HEATUP       // Heat up the nozzle instead of skipping wipe
+  #define NOZZLE_CLEAN_MIN_TEMP 180
+  #define NOZZLE_CLEAN_HEATUP       // Heat up the nozzle instead of skipping wipe
 
   // Explicit wipe G-code script applies to a G12 with no arguments.
   //#define WIPE_SEQUENCE_COMMANDS "G1 X-17 Y25 Z10 F4000\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nG0 X-10.0 Y-9.0"
@@ -2844,7 +2844,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-#define SPEAKER
+//#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
