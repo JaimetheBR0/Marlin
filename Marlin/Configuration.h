@@ -1309,7 +1309,7 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 800, 690 }
-// calibrated to 98.42, 100.10, 800, 690
+// calibrated to 98.32, 100.10, 800, 690
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
  */
