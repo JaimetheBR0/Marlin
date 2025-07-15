@@ -2362,18 +2362,18 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
+    #define ADVANCE_K { 0.035 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
-    #define ADVANCE_K 0.22        // (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.035        // (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
 
-  //#define SMOOTH_LIN_ADVANCE    // Remove limits on acceleration by gradual increase of nozzle pressure
+  #define SMOOTH_LIN_ADVANCE    // Remove limits on acceleration by gradual increase of nozzle pressure
   #if ENABLED(SMOOTH_LIN_ADVANCE)
     /**
      * ADVANCE_TAU is also the time ahead that the smoother needs to look
@@ -2383,9 +2383,9 @@
      * Higher k and higher XY acceleration may require larger ADVANCE_TAU to avoid skipping steps.
      */
     #if ENABLED(DISTINCT_E_FACTORS)
-      #define ADVANCE_TAU { 0.02 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
+      #define ADVANCE_TAU { 0.01 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
     #else
-      #define ADVANCE_TAU 0.02       // (s) Smoothing time to reduce extruder acceleration
+      #define ADVANCE_TAU 0.01       // (s) Smoothing time to reduce extruder acceleration
     #endif
     #define SMOOTH_LIN_ADV_HZ 1000   // (Hz) How often to update extruder speed
     #define INPUT_SHAPING_E_SYNC     // Synchronize the extruder-shaped XY axes (to increase precision)
