@@ -1220,8 +1220,8 @@
  *
  * Tune with M593 D<factor> F<frequency>
  */
-#define INPUT_SHAPING_X
-#define INPUT_SHAPING_Y
+//#define INPUT_SHAPING_X
+//#define INPUT_SHAPING_Y
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
@@ -4171,7 +4171,7 @@
   #if PIN_EXISTS(BUTTON1)
     #define BUTTON1_HIT_STATE     HIGH       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON1_WHEN_PRINTING false     // Button allowed to trigger during printing?
-    #define BUTTON1_GCODE         "M702 \n M104 S0"
+    #define BUTTON1_GCODE         "M104 S" STRINGIFY(EXTRUDE_MINTEMP) "\n M109 \n M702 \n M104 S0"
     #define BUTTON1_DESC          "Unloading Filament"  // Optional string to set the LCD status
   #endif
 
