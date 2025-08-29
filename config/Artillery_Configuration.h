@@ -94,7 +94,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+#define BAUDRATE 57600
 
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
@@ -2246,7 +2246,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 8      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 7      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2494,17 +2494,23 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL       "PLA"
+#define PREHEAT_1_LABEL "PLA"
 #define PREHEAT_1_TEMP_HOTEND 160
-#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_TEMP_BED 60
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED   100 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED 100 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "PETG"
+#define PREHEAT_2_LABEL "PETG"
 #define PREHEAT_2_TEMP_HOTEND 180
-#define PREHEAT_2_TEMP_BED     75
+#define PREHEAT_2_TEMP_BED 75
 #define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED   100 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED 100 // Value from 0 to 255
+
+#define PREHEAT_3_LABEL "TPU"
+#define PREHEAT_3_TEMP_HOTEND 180
+#define PREHEAT_3_TEMP_BED 40
+#define PREHEAT_3_TEMP_CHAMBER 35
+#define PREHEAT_3_FAN_SPEED 100 // Value from 0 to 255
 
 /**
  * @section nozzle park
