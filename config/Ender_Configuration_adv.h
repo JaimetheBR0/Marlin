@@ -1409,7 +1409,7 @@
  * Multi-stepping sends steps in bursts to reduce MCU usage for high step-rates.
  * This allows higher feedrates than the MCU could otherwise support.
  */
-#define MULTISTEPPING_LIMIT   32  // :[1, 2, 4, 8, 16, 32, 64, 128]
+#define MULTISTEPPING_LIMIT   16  // :[1, 2, 4, 8, 16, 32, 64, 128]
 
 /**
  * Adaptive Step Smoothing increases the resolution of multi-axis moves, particularly at step frequencies
@@ -2761,7 +2761,7 @@
 //#define NO_TIMEOUTS 1000 // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-#define ADVANCED_OK
+//#define ADVANCED_OK
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
