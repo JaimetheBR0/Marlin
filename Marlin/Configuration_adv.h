@@ -1203,7 +1203,7 @@
                                                   //   ZVD, MZV : FTM_RATIO
                                                   //   2HEI     : FTM_RATIO * 3 / 2
                                                   //   3HEI     : FTM_RATIO * 2
-#endif // FT_MOTION
+#endif
 
 /**
  * Input Shaping
@@ -4005,7 +4005,7 @@
 #endif
 
 /**
- * M115 - Report capabilities. Disable to save ~1150 bytes of flash.
+ * M115 - Report capabilites. Disable to save ~1150 bytes of flash.
  *        Some hosts (and serial TFT displays) rely on this feature.
  */
 #define CAPABILITIES_REPORT
