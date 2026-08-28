@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -68,7 +68,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V3_0
+  #define MOTHERBOARD BOARD_BTT_OCTOPUS_V1_1
 #endif
 
 // @section serial
@@ -111,7 +111,7 @@
  * Currently supported for AVR, DUE, SAMD51, LPC1768/9, STM32/STM32F1/HC32, and Teensy 4.x
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-//#define SERIAL_PORT_3 1
+//#define SERIAL_PORT_3 3 // wifi port
 //#define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
@@ -135,7 +135,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender-3 V2, SKRME3V3, BLT, T5"
+#define CUSTOM_MACHINE_NAME "THE KRAKEN"
 //#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -164,7 +164,7 @@
 #define Z_DRIVER_TYPE TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE TMC2209
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 //#define I_DRIVER_TYPE  A4988
@@ -174,7 +174,7 @@
 //#define V_DRIVER_TYPE  A4988
 //#define W_DRIVER_TYPE  A4988
 #define E0_DRIVER_TYPE TMC2209
-//#define E1_DRIVER_TYPE A4988
+#define E1_DRIVER_TYPE TMC2209
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -228,7 +228,7 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+#define EXTRUDERS 2
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
@@ -395,8 +395,8 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-//#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
-//#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
+#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
+#define HOTEND_OFFSET_Y { 0.0, 0.00 }  // (mm) relative Y-offset for each nozzle
 //#define HOTEND_OFFSET_Z { 0.0, 0.00 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
@@ -587,15 +587,15 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 5
-#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_0 13
+#define TEMP_SENSOR_1 13
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 7
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -677,7 +677,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 300
+#define HEATER_0_MAXTEMP 275
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -756,7 +756,7 @@
   #define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
 
   #define MPC_MAX 255                                 // (0..255) Current to nozzle while MPC is active.
-  #define MPC_HEATER_POWER { 70.0f }                  // (W) Nominal heat cartridge powers.
+  #define MPC_HEATER_POWER { 70.0f, 70.0f }                  // (W) Nominal heat cartridge powers.
   //#define MPC_PTC                                   // Hotend power changes with temperature (e.g., PTC heat cartridges).
   #if ENABLED(MPC_PTC)
     #define MPC_HEATER_ALPHA { 0.0028f }              // Temperature coefficient of resistance of the heat cartridges.
@@ -766,11 +766,11 @@
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
   // Measured physical constants from M306
-  #define MPC_BLOCK_HEAT_CAPACITY { 14.3f }           // (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.124f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
-  #define MPC_AMBIENT_XFER_COEFF { 0.088f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+  #define MPC_BLOCK_HEAT_CAPACITY { 14.3f, 14.3f }           // (J/K) Heat block heat capacities.
+  #define MPC_SENSOR_RESPONSIVENESS { 0.124f, 0.124f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
+  #define MPC_AMBIENT_XFER_COEFF { 0.088f, 0.088f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
   #if ENABLED(MPC_INCLUDE_FAN)
-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.120f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.120f, 0.120f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
   #endif
 
   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
@@ -781,7 +781,7 @@
 
   // Filament Heat Capacity (joules/kelvin/mm)
   // Set at runtime with M306 H<value>
-  #define FILAMENT_HEAT_CAPACITY_PERMM { 5.6e-3f }    // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
+  #define FILAMENT_HEAT_CAPACITY_PERMM { 5.6e-3f, 5.6e-3f }    // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
                                                       // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
                                                       // 0.00515 J/K/mm for 1.75mm ABS (0.0137 J/K/mm for 2.85mm ABS).
                                                       // 0.00522 J/K/mm for 1.75mm Nylon (0.0138 J/K/mm for 2.85mm Nylon).
@@ -1351,15 +1351,15 @@
  * following movement settings. If fewer factors are given than the
  * total number of extruders, the last value applies to the rest.
  */
-//#define DISTINCT_E_FACTORS
+#define DISTINCT_E_FACTORS
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 400, 412 }
-// 80 80 400 412
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 400}
+
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
  */
@@ -1383,9 +1383,9 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 200, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 2500, 200, 10000 }
 
-#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
+//#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
   #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 400, 20000 } // ...or, set your own edit limits
 #endif
@@ -1398,7 +1398,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          2500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  2000    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
@@ -1693,7 +1693,7 @@
  * Nozzle-to-Probe offsets { X, Y, Z }
  *
  * X and Y offset
- *   Use a caliper or ruler to measure the distance (in mm) from the tip of
+ *   Use a caliper or ruler to measure the distance from the tip of
  *   the Nozzle to the center-point of the Probe in the X and Y axes.
  *
  * Z offset
@@ -1729,10 +1729,10 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -33, -4, -3 }
+#define NOZZLE_TO_PROBE_OFFSET { 57.4, -38.7, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
-#define PROBING_TOOL 0
+//#define PROBING_TOOL 0
 #ifdef PROBING_TOOL
   //#define PROBE_TOOLCHANGE_NO_MOVE  // Suppress motion on probe tool-change
 #endif
@@ -1741,7 +1741,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+#define PROBING_MARGIN 40
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
@@ -1895,14 +1895,14 @@
 // @section extruder
 
 //#define DISABLE_E               // Disable the extruder when not stepping
-#define DISABLE_OTHER_EXTRUDERS   // Keep only the active extruder enabled
+//#define DISABLE_OTHER_EXTRUDERS   // Keep only the active extruder enabled
 
 // @section stepper drivers
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#define INVERT_X_DIR false
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR true
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -1936,7 +1936,7 @@
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 #define Z_AFTER_HOMING         50   // (mm) Height to move to after homing (if Z was homed)
-#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
+//#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
@@ -1970,16 +1970,16 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 220
-#define Y_BED_SIZE 220
+#define X_BED_SIZE 350
+#define Y_BED_SIZE 350
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
-#define Y_MIN_POS -25
+#define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS (250 + X_MIN_POS)
-#define Y_MAX_POS (250 + Y_MIN_POS)
-#define Z_MAX_POS 265
+#define X_MAX_POS X_BED_SIZE
+#define Y_MAX_POS Y_BED_SIZE
+#define Z_MAX_POS 300
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2052,10 +2052,12 @@
 #define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
-  #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+  #define NUM_RUNOUT_SENSORS   2          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+  #define FIL_RUNOUT_PIN      PG12
+  #define FIL_RUNOUT2_PIN     PG13
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
-  //#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+  #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
@@ -2096,35 +2098,36 @@
   // Commands to execute on filament runout.
   // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
   // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
-  #define FILAMENT_RUNOUT_SCRIPT "M600"
+  #define FILAMENT_RUNOUT_SCRIPT "M600 T%c"
 
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
   // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
-  #define FILAMENT_RUNOUT_DISTANCE_MM 10
+  #define FILAMENT_RUNOUT_DISTANCE_MM 20
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // Enable this option to use an encoder disc that toggles the runout pin
-    // as the filament moves. (Be sure to set FILAMENT_MOTION_DISTANCE_MM
+    // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
     // large enough to avoid false positives.)
-    //#define FILAMENT_MOTION_SENSOR
+    #define FILAMENT_MOTION_SENSOR
 
     #if ENABLED(FILAMENT_MOTION_SENSOR)
-      //#define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
+      #define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
 
-        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+        #define FILAMENT_MOTION_DISTANCE_MM 6 // (mm) Missing distance required to trigger runout
 
-        #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
-        //#define FIL_MOTION1_PIN    -1
+        #define NUM_MOTION_SENSORS   2          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
+        #define FIL_MOTION1_PIN    PG14
+        #define FIL_MOTION2_PIN    PG15
 
         // Override individually if the motion sensors vary
         //#define FIL_MOTION1_STATE LOW
-        //#define FIL_MOTION1_PULLUP
+        #define FIL_MOTION1_PULLUP
         //#define FIL_MOTION1_PULLDOWN
 
         //#define FIL_MOTION2_STATE LOW
-        //#define FIL_MOTION2_PULLUP
+        #define FIL_MOTION2_PULLUP
         //#define FIL_MOTION2_PULLDOWN
 
         //#define FIL_MOTION3_STATE LOW
@@ -2376,7 +2379,7 @@
 #define LCD_BED_TRAMMING
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 50, 50, 50, 50 } // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 60, 60, 60, 60 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       5.0        // (mm) Z raise between tramming points
   #define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
@@ -2440,7 +2443,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (25*60), (50*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (10*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 #define EDITABLE_HOMING_FEEDRATE
@@ -3111,7 +3114,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // K.3D Full Graphic Smart Controller
@@ -3223,7 +3226,7 @@
 //
 // Connect to EXP1 on RAMPS and compatible boards.
 //
-#define CR10_STOCKDISPLAY
+//#define CR10_STOCKDISPLAY
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
@@ -3801,7 +3804,7 @@
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+//#define SERVO_DELAY { 300 }
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 //#define DEACTIVATE_SERVOS_AFTER_MOVE

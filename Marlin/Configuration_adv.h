@@ -608,7 +608,7 @@
  */
 #define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
-  #define CONTROLLER_FAN_PIN FAN2_PIN           // Set a custom pin for the controller fan
+  #define CONTROLLER_FAN_PIN FAN5_PIN       // Set a custom pin for the controller fan
   //#define CONTROLLER_FAN2_PIN -1          // Set a custom pin for second controller fan
   //#define CONTROLLER_FAN_USE_Z_ONLY       // With this option only the Z axis is considered
   //#define CONTROLLER_FAN_IGNORE_Z         // Ignore Z stepper. Useful when stepper timeout is disabled.
@@ -657,7 +657,7 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-//#define FAN_MIN_PWM 50
+#define FAN_MIN_PWM 25
 //#define FAN_MAX_PWM 128
 
 /**
@@ -718,9 +718,9 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN PC7
-#define E1_AUTO_FAN_PIN -1
-#define E2_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN2_PIN
+#define E1_AUTO_FAN_PIN FAN2_PIN
+#define E2_AUTO_FAN_PIN FAN2_PIN
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
 #define E5_AUTO_FAN_PIN -1
@@ -960,10 +960,10 @@
  * the position of the toolhead relative to the workspace.
  */
 
-#define SENSORLESS_BACKOFF_MM  { 2, 0, 0 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
+#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
 
-#define HOMING_BUMP_MM      { 0, 5, 2 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
-#define HOMING_BUMP_DIVISOR { 1, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_MM      { 0, 0, 2 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
+#define HOMING_BUMP_DIVISOR { 1, 1, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
@@ -1057,7 +1057,7 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-//#define Z_STEPPER_AUTO_ALIGN
+#define Z_STEPPER_AUTO_ALIGN
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
   /**
    * Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
@@ -1136,11 +1136,11 @@
  *
  * Add the G35 command to measure bed corners and help adjust screws. Requires a bed probe.
  */
-#define ASSISTED_TRAMMING
+//#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define from 3 to 9 points to probe.
-  #define TRAMMING_POINT_XY { {  50, 50 }, { 170,  50 }, { 170, 50 }, { 50, 170 } }
+  #define TRAMMING_POINT_XY { {  40, 40 }, { 244,  40 }, { 244, 40 }, { 40, 244 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -1148,12 +1148,12 @@
   #define TRAMMING_POINT_NAME_3 "Back-Right"
   #define TRAMMING_POINT_NAME_4 "Back-Left"
 
-  //#define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
+  #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
   #define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
 
   #define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
 
-  #define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
+  //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
   /**
    * Screw Thread. Use one of the following defines:
@@ -1164,7 +1164,7 @@
    *
    * :{'M3_CW':'M3 Clockwise','M3_CCW':'M3 Counter-Clockwise','M4_CW':'M4 Clockwise','M4_CCW':'M4 Counter-Clockwise','M5_CW':'M5 Clockwise','M5_CCW':'M5 Counter-Clockwise'}
    */
-  #define TRAMMING_SCREW_THREAD M4_CW
+  #define TRAMMING_SCREW_THREAD M3_CW
 
 #endif
 
@@ -1298,12 +1298,12 @@
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X  60.0        // (Hz) The default dominant resonant frequency on the X axis.
-    #define SHAPING_ZETA_X   0.20      // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y  39.0        // (Hz) The default dominant resonant frequency on the Y axis.
-    #define SHAPING_ZETA_Y   0.20       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_Y  40.0        // (Hz) The default dominant resonant frequency on the Y axis.
+    #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Z)
     #define SHAPING_FREQ_Z  40.0        // (Hz) The default dominant resonant frequency on the Z axis.
@@ -2463,9 +2463,9 @@
 
 #if ANY(LIN_ADVANCE, FT_MOTION)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0.02 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
+    #define ADVANCE_K { 0.07 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
-    #define ADVANCE_K 0.02        // (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.07        // (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
 #endif
@@ -2484,9 +2484,9 @@
      * Higher k and higher XY acceleration may require larger ADVANCE_TAU to avoid skipping steps.
      */
     #if ENABLED(DISTINCT_E_FACTORS)
-      #define ADVANCE_TAU { 0.01 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
+      #define ADVANCE_TAU { 0.02 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
     #else
-      #define ADVANCE_TAU 0.01       // (s) Smoothing time to reduce extruder acceleration
+      #define ADVANCE_TAU 0.02       // (s) Smoothing time to reduce extruder acceleration
     #endif
     #define SMOOTH_LIN_ADV_HZ 1000   // (Hz) How often to update extruder speed
     #define INPUT_SHAPING_E_SYNC     // Synchronize the extruder-shaped XY axes (to increase precision)
@@ -3074,19 +3074,19 @@
  */
 #define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
-  #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
+  #define PAUSE_PARK_RETRACT_FEEDRATE         40  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
                                                   // This short retract is done immediately, before parking the nozzle.
-  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     45  // (mm/s) Unload filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     60  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        20  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH       50  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      110  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
-  #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   6  // (mm/s) Slow move when starting load.
+  #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   4  // (mm/s) Slow move when starting load.
   #define FILAMENT_CHANGE_SLOW_LOAD_LENGTH    10 // (mm) Slow length, to allow time to insert material.
                                                   // 0 to disable start loading and skip to fast load only
-  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  10  // (mm/s) Load filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  20  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
   #define FILAMENT_CHANGE_FAST_LOAD_LENGTH    40  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
@@ -3101,7 +3101,7 @@
   #define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
-  #define FILAMENT_UNLOAD_PURGE_RETRACT        2  // (mm) Unload initial retract length.
+  #define FILAMENT_UNLOAD_PURGE_RETRACT        1  // (mm) Unload initial retract length.
   #define FILAMENT_UNLOAD_PURGE_DELAY       5000  // (ms) Delay for the filament to cool after retract.
   #define FILAMENT_UNLOAD_PURGE_LENGTH         4  // (mm) An unretract is done, then this length is purged.
   #define FILAMENT_UNLOAD_PURGE_FEEDRATE       4  // (mm/s) feedrate to purge before unload
@@ -3304,7 +3304,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      800
+    #define E0_CURRENT      750
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3380,7 +3380,7 @@
    * point where a collision makes the motor skip instead of damaging the bed,
    * though this is unlikely to save delicate probes from being damaged.
    */
-  #define PROBING_USE_CURRENT_HOME
+  //#define PROBING_USE_CURRENT_HOME
 
   // @section tmc/spi
 
@@ -3503,9 +3503,9 @@
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
   #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
-  #define CHOPPER_TIMING_X  CHOPPER_09STEP_24V        // For X Axes (override below)
+  //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
-  #define CHOPPER_TIMING_Y  CHOPPER_09STEP_24V        // For Y Axes (override below)
+  //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
   //#define CHOPPER_TIMING_Y2 CHOPPER_TIMING_Y
   //#define CHOPPER_TIMING_Z  CHOPPER_TIMING        // For Z Axes (override below)
   //#define CHOPPER_TIMING_Z2 CHOPPER_TIMING_Z
@@ -3611,9 +3611,9 @@
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  82
-    #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    //#define Y_STALL_SENSITIVITY  8
+    #define X_STALL_SENSITIVITY  40
+    //#define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
+    #define Y_STALL_SENSITIVITY  45
     //#define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY

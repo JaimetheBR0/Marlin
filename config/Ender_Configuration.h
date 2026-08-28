@@ -1936,7 +1936,7 @@
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 #define Z_AFTER_HOMING         50   // (mm) Height to move to after homing (if Z was homed)
-#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
+//#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
@@ -3801,7 +3801,7 @@
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+//#define SERVO_DELAY { 300 }
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 //#define DEACTIVATE_SERVOS_AFTER_MOVE
